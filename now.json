@@ -3,6 +3,6 @@
   "name": "wollschlegel",
   "alias": ["www.wollschlegel.com", "wollschlegel.com"],
   "builds": [
-    { "src": "package.json", "use": "@now/static-build" }
+    { "src": "package.json", "use": "@now/static-build", "config": { "distDir": "public" } }
   ]
 }
