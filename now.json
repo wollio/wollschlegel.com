@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "name": "portfolio",
+  "name": "wollschlegel",
   "alias": ["www.wollschlegel.com", "wollschlegel.com"],
   "builds": [
     { "src": "package.json", "use": "@now/static-build" }
