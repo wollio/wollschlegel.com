@@ -8,7 +8,7 @@ import { Navigation } from '.'
 import config from '../../utils/siteConfig'
 
 // Styles
-import '../../styles/app.css'
+import '../../styles/screen.css'
 
 /**
 * Main layout component
@@ -19,9 +19,9 @@ import '../../styles/app.css'
 *
 */
 const DefaultLayout = ({ data, children, bodyClass, isHome }) => {
-    const site = data.allGhostSettings.edges[0].node
-    const twitterUrl = site.twitter ? `https://twitter.com/${site.twitter.replace(/^@/, ``)}` : null
-    const facebookUrl = site.facebook ? `https://www.facebook.com/${site.facebook.replace(/^\//, ``)}` : null
+    const site = data.allGhostSettings.edges[0].node;
+    const twitterUrl = site.twitter ? `https://twitter.com/${site.twitter.replace(/^@/, ``)}` : null;
+    const facebookUrl = site.facebook ? `https://www.facebook.com/${site.facebook.replace(/^\//, ``)}` : null;
 
     return (
     <>
@@ -31,66 +31,55 @@ const DefaultLayout = ({ data, children, bodyClass, isHome }) => {
             <body className={bodyClass} />
         </Helmet>
 
-        <div className="viewport">
-
-            <div className="viewport-top">
-                {/* The main header section on top of the screen */}
-                <header className="site-head">
-                    <div className="container">
-                        <div className="site-mast">
-                            <div className="site-mast-left">
-                                <Link to="/">
-                                    {site.logo ?
-                                        <img className="site-logo" src={site.logo} alt={site.title} />
-                                        : <Img fixed={data.file.childImageSharp.fixed} alt={site.title} />
-                                    }
-                                </Link>
-                            </div>
-                            <div className="site-mast-right">
-                                { site.twitter && <a href={ twitterUrl } className="site-nav-item" target="_blank" rel="noopener noreferrer"><img className="site-nav-icon" src="/images/icons/twitter.svg" alt="Twitter" /></a>}
-                                { site.facebook && <a href={ facebookUrl } className="site-nav-item" target="_blank" rel="noopener noreferrer"><img className="site-nav-icon" src="/images/icons/facebook.svg" alt="Facebook" /></a>}
-                                <a className="site-nav-item" href={ `https://feedly.com/i/subscription/feed/${config.siteUrl}/rss/` } target="_blank" rel="noopener noreferrer"><img className="site-nav-icon" src="/images/icons/rss.svg" alt="RSS Feed" /></a>
+        <div className="site-wrapper">
+            <header className="site-head">
+                <div className="site-head-container">
+                    <a className="nav-burger" href="#">
+                        <div className="hamburger hamburger--collapse" aria-label="Menu" role="button"
+                             aria-controls="navigation">
+                            <div className="hamburger-box">
+                                <div className="hamburger-inner"></div>
                             </div>
                         </div>
-                        { isHome ?
-                            <div className="site-banner">
-                                <h1 className="site-banner-title">{site.title}</h1>
-                                <p className="site-banner-desc">{site.description}</p>
-                            </div> :
-                            null}
-                        <nav className="site-nav">
-                            <div className="site-nav-left">
-                                {/* The navigation items as setup in Ghost */}
-                                <Navigation data={site.navigation} navClass="site-nav-item" />
-                            </div>
-                            <div className="site-nav-right">
-                                <Link className="site-nav-button" to="/about">About</Link>
-                            </div>
-                        </nav>
+                    </a>
+                    <nav id="swup" className="site-head-left">
+                        {/* The navigation items as setup in Ghost */}
+                        <Navigation data={site.navigation} navClass="site-nav-item" />
+                    </nav>
+                    <div className="site-head-center">
+                        <Link to="/" className="site-head-logo">
+                            {site.logo ?
+                                <img src={site.logo} alt={site.title} />
+                                : <Img fixed={data.file.childImageSharp.fixed} alt={site.title} />
+                            }
+                        </Link>
                     </div>
-                </header>
+                    <div className="site-head-right">
+                        <div className="social-links">
+                            { site.twitter && <a href={ twitterUrl } target="_blank" rel="noopener noreferrer">Twitter</a>}
+                            { site.facebook && <a href={ facebookUrl } target="_blank" rel="noopener noreferrer">Facebook</a>}
+                            <a href={ `https://feedly.com/i/subscription/feed/${config.siteUrl}/rss/` } target="_blank" rel="noopener noreferrer">RSS</a>
+                        </div>
+                    </div>
+                </div>
+            </header>
 
-                <main className="site-main">
-                    {/* All the main content gets inserted here, index.js, post.js */}
+            <main id="site-main" className="site-main">
+                <div id="swup" className="transition-fade">
+                    { isHome ?
+                        <header className="page-head">
+                            <h2 className="page-head-title">{site.description}</h2>
+                        </header>
+                        :
+                        null}
                     {children}
-                </main>
 
-            </div>
+                </div>
+            </main>
 
-            <div className="viewport-bottom">
-                {/* The footer at the very bottom of the screen */}
-                <footer className="site-foot">
-                    <div className="site-foot-nav container">
-                        <div className="site-foot-nav-left">
-                            <Link to="/">{site.title}</Link> © 2019 &mdash; Published with <a className="site-foot-nav-item" href="https://ghost.org" target="_blank" rel="noopener noreferrer">Ghost</a>
-                        </div>
-                        <div className="site-foot-nav-right">
-                            <Navigation data={site.navigation} navClass="site-foot-nav-item" />
-                        </div>
-                    </div>
-                </footer>
-
-            </div>
+            <footer className="site-foot">
+                © 2019 <Link to="/">{site.title}</Link> &mdash; Published with <a href="https://ghost.org" target="_blank" rel="noopener">Ghost</a>
+            </footer>
         </div>
 
     </>
