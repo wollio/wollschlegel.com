@@ -12,16 +12,24 @@ import { Link } from 'gatsby'
 * to a `site-nav-item` class.
 *
 */
-const Navigation = ({ data, navClass }) => (
-    <>
+const Navigation = ({ data, navClass, location }) => (
+    <ul className="nav" role="menu">
         {data.map((navItem, i) => {
             if (navItem.url.match(/^\s?http(s?)/gi)) {
-                return <a className={navClass} href={navItem.url} key={i} target="_blank" rel="noopener noreferrer">{navItem.label}</a>
+                return (
+                    <li role="menuitem" key={i}>
+                        <a className={navClass} href={navItem.url} target="_blank" rel="noopener noreferrer">{navItem.label}</a>
+                    </li>
+                )
             } else {
-                return <Link className={navClass} to={navItem.url} key={i}>{navItem.label}</Link>
+                return (
+                    <li role="menuitem" key={i} className={`${location.pathname === path ? 'nav-current' : ''}`}>
+                        <Link className={navClass} to={navItem.url}>{navItem.label}</Link>
+                    </li>
+                )
             }
         })}
-    </>
+    </ul>
 )
 
 Navigation.defaultProps = {

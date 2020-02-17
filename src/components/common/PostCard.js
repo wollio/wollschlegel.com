@@ -4,14 +4,14 @@ import { Link } from 'gatsby'
 import { Tags } from '@tryghost/helpers-gatsby'
 import { readingTime as readingTimeHelper } from '@tryghost/helpers'
 
-const PostCard = ({ post }) => {
+const PostCard = ({ post, count }) => {
     const url = `/${post.slug}/`
     const readingTime = readingTimeHelper(post)
 
     return (
 
         <article
-            className={`post-card ${post.count % 3 === 0 && `post-card-large`}
+            className={`post-card ${count % 3 === 0 && `post-card-large`}
              ${post.feature_image ? `with-image` : `no-image`}`}
             style={
                 post.feature_image && {

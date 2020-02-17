@@ -14,17 +14,21 @@ import { MetaData } from '../components/common/meta'
 *
 */
 const Index = ({ data, location, pageContext }) => {
-    const posts = data.allGhostPost.edges
+    const posts = data.allGhostPost.edges;
+    let postCounter = 0;
 
     return (
         <>
             <MetaData location={location} />
-            <Layout isHome={true}>
+            <Layout isHome={true} bodyClass="home-template">
                 <div className="post-feed">
-                        {posts.map(({ node }) => (
-                            // The tag below includes the markup for each post - components/common/PostCard.js
-                            <PostCard key={node.id} post={node} />
-                        ))}
+                        {posts.map(({ node }) => {
+                            postCounter++;
+                            return (
+                                // The tag below includes the markup for each post - components/common/PostCard.js
+                                <PostCard key={node.id} post={node} count={postCounter} />
+                            )
+                        })}
                     <Pagination pageContext={pageContext} />
                 </div>
             </Layout>

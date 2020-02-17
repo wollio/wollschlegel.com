@@ -54,6 +54,17 @@ module.exports = {
             },
         },
         `gatsby-plugin-sharp`,
+        {
+            resolve: `gatsby-plugin-postcss`,
+            options: {
+                postCssPlugins: [
+                    require("postcss-easy-import")(),
+                    require("postcss-custom-properties")({ preserve: false }),
+                    require("postcss-color-function")(),
+                    require("autoprefixer")({ browsers: ["last 2 versions"] }),
+                ],
+            },
+        },
         `gatsby-transformer-sharp`,
         {
             resolve: `gatsby-source-ghost`,

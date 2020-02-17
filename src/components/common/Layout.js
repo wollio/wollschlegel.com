@@ -23,18 +23,20 @@ const DefaultLayout = ({ data, children, bodyClass, isHome }) => {
     const twitterUrl = site.twitter ? `https://twitter.com/${site.twitter.replace(/^@/, ``)}` : null;
     const facebookUrl = site.facebook ? `https://www.facebook.com/${site.facebook.replace(/^\//, ``)}` : null;
 
+    const [toggleNav, setToggleNav] = React.useState(false);
+
     return (
     <>
         <Helmet>
             <html lang={site.lang} />
             <style type="text/css">{`${site.codeinjection_styles}`}</style>
-            <body className={bodyClass} />
+            <body className={`${bodyClass} ${toggleNav ? `site-head-open` : ``}`} />
         </Helmet>
 
-        <div className="site-wrapper">
+        <div className={`site-wrapper ${toggleNav ? `site-head-open` : ``}`}>
             <header className="site-head">
                 <div className="site-head-container">
-                    <a className="nav-burger" href="#">
+                    <a className="nav-burger" href={'#'} onClick={() => setToggleNav(!toggleNav)}>
                         <div className="hamburger hamburger--collapse" aria-label="Menu" role="button"
                              aria-controls="navigation">
                             <div className="hamburger-box">
