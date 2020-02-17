@@ -22,8 +22,12 @@ const Navigation = ({ data, navClass, location }) => (
                     </li>
                 )
             } else {
+                /**
+                 * className={`${location.pathname === path ? 'nav-current' : ''}`}
+                 */
+
                 return (
-                    <li role="menuitem" key={i} className={`${location.pathname === path ? 'nav-current' : ''}`}>
+                    <li role="menuitem" key={i}>
                         <Link className={navClass} to={navItem.url}>{navItem.label}</Link>
                     </li>
                 )
