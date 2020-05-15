@@ -41,6 +41,7 @@ exports.createPages = async ({ graphql, actions }) => {
                     node {
                         slug
                         url
+                        custom_template
                     }
                 }
             }
@@ -172,6 +173,7 @@ exports.createPages = async ({ graphql, actions }) => {
                 // Data passed to context is available
                 // in page queries as GraphQL variables.
                 slug: node.slug,
+                custom_template: node.custom_template
             },
         })
     })

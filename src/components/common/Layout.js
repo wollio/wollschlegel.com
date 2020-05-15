@@ -80,7 +80,7 @@ const DefaultLayout = ({ data, children, bodyClass, isHome }) => {
             </main>
 
             <footer className="site-foot">
-                © 2019 <Link to="/">{site.title}</Link> &mdash; Published with <a href="https://ghost.org" target="_blank" rel="noopener">Ghost</a>
+                © 2020 <Link to="/">{site.title}</Link>
             </footer>
         </div>
 

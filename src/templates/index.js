@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 
-import { Layout, PostCard, Pagination } from '../components/common'
+import { Layout, PostLink, Pagination } from '../components/common'
 import { MetaData } from '../components/common/meta'
 
 /**
@@ -26,7 +26,7 @@ const Index = ({ data, location, pageContext }) => {
                             postCounter++;
                             return (
                                 // The tag below includes the markup for each post - components/common/PostCard.js
-                                <PostCard key={node.id} post={node} count={postCounter} />
+                                <PostLink key={node.id} post={node} count={postCounter} />
                             )
                         })}
                     <Pagination pageContext={pageContext} />
@@ -53,6 +53,7 @@ export default Index
 export const pageQuery = graphql`
   query GhostPostQuery($limit: Int!, $skip: Int!) {
     allGhostPost(
+        filter: {custom_template: {eq: null}},
         sort: { order: DESC, fields: [published_at] },
         limit: $limit,
         skip: $skip

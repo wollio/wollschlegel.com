@@ -391,8 +391,24 @@ body {
 
 .post-feed {
     display: flex;
-    align-items: ;
     flex-wrap: wrap;
+}
+
+.post-link {
+    flex: 1 1 100%;
+    min-height: 15vh;
+    display: flex;
+    position: relative;
+    border-bottom: 2px solid black;
+}
+
+.post-link a {
+    color: black;
+    text-decoration: none;
+}
+
+.post-link a:hover {
+    color: #5bbf97;
 }
 
 .post-card {

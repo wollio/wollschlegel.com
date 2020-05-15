@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 import Helmet from 'react-helmet'
 
-import { Layout } from '../components/common'
+import {Layout, Pagination, PostCard} from '../components/common'
 import { MetaData } from '../components/common/meta'
 
 /**
@@ -13,26 +13,47 @@ import { MetaData } from '../components/common/meta'
 *
 */
 const Page = ({ data, location }) => {
-    const page = data.ghostPage
+    const page = data.ghostPage;
+    const posts = data.allGhostPost.edges;
+    let postCounter = 0;
 
-    return (
-        <>
-            <MetaData
-                data={data}
-                location={location}
-                type="website"
-            />
-            <Helmet>
-                <style type="text/css">{`${page.codeinjection_styles}`}</style>
-            </Helmet>
-            <Layout>
-                <article className="post-content">
-                    <div className="post-content-body"
-                         dangerouslySetInnerHTML={{ __html: page.html }} />
-                </article>
-            </Layout>
-        </>
-    )
+    if (page.custom_template) {
+        return (
+            <>
+                <MetaData location={location} />
+                <Layout isHome={true} bodyClass="home-template">
+                    <div className="post-feed">
+                        {posts.map(({ node }) => {
+                            postCounter++;
+                            return (
+                                // The tag below includes the markup for each post - components/common/PostCard.js
+                                <PostCard key={node.id} post={node} count={postCounter} />
+                            )
+                        })}
+                    </div>
+                </Layout>
+            </>
+        );
+    } else {
+        return (
+            <>
+                <MetaData
+                    data={data}
+                    location={location}
+                    type="website"
+                />
+                <Helmet>
+                    <style type="text/css">{`${page.codeinjection_styles}`}</style>
+                </Helmet>
+                <Layout>
+                    <article className="post-content">
+                        <div className="post-content-body"
+                             dangerouslySetInnerHTML={{ __html: page.html }} />
+                    </article>
+                </Layout>
+            </>
+        )
+    }
 }
 
 Page.propTypes = {
@@ -42,6 +63,11 @@ Page.propTypes = {
             html: PropTypes.string.isRequired,
             feature_image: PropTypes.string,
         }).isRequired,
+        ghostPost: PropTypes.shape({
+            title: PropTypes.string.isRequired,
+            html: PropTypes.string.isRequired,
+            feature_image: PropTypes.string,
+        }).isRequired
     }).isRequired,
     location: PropTypes.object.isRequired,
 }
@@ -49,9 +75,24 @@ Page.propTypes = {
 export default Page
 
 export const postQuery = graphql`
-    query($slug: String!) {
+    query($slug: String!, $custom_template: String) {
         ghostPage(slug: { eq: $slug }) {
             ...GhostPageFields
         }
+        allGhostPost(
+          filter: {custom_template: {eq: $custom_template}},
+        ) {
+          edges {
+            node {
+              ...GhostPostFields
+            }
+          }
+        }
     }
 `
+
+/**
+ * ghostPost() {
+            ...GhostPostFields
+        }
+ */
