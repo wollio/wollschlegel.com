@@ -10,14 +10,12 @@ const PostLink = ({ post, count }) => {
 
     return (
 
-        <article
-            className={`post-link`}
-        >
+        <article className={`post-link`}>
             <Link to={url} className="post-card-link">
                 <h2>{post.title || post.slug}</h2>
             </Link>
-
         </article>
+
     )
 }
 

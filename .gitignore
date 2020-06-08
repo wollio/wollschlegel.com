@@ -1,5 +1,8 @@
 # Node template
 
+# Ghost
+.ghost.json
+
 # Logs
 logs
 *.log
