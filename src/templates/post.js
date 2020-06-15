@@ -33,12 +33,6 @@ const Post = ({ data, location }) => {
                             <h1 className="post-content-title">{post.title}</h1>
                         </header>
 
-                        { post.feature_image ?
-                            <div className="post-content-image">
-                                <img className="kg-image" src={post.feature_image} alt={post.title} />
-                            </div> : null
-                        }
-
                         <div className="post-content-body" dangerouslySetInnerHTML={{ __html: post.html }} />
 
                     </article>

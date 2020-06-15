@@ -21,8 +21,8 @@ const Page = ({ data, location }) => {
         return (
             <>
                 <MetaData location={location} />
-                <Layout>
-                    <div className="post-content">
+                <Layout bodyClass="home-template">
+                    <div className="post-feed">
                         {posts.map(({ node }) => {
                             postCounter++;
                             return (
