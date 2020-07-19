@@ -29,4 +29,7 @@ var trustAllScripts = function () {
 
 exports.onRouteUpdate = function () {
     trustAllScripts();
+    if (window.initMasonry) {
+        window.initMasonry();
+    }
 };

@@ -29,8 +29,8 @@ const Index = ({ data, location, pageContext }) => {
                                 <PostLink key={node.id} post={node} count={postCounter} />
                             )
                         })}
-                    <Pagination pageContext={pageContext} />
                 </div>
+                <Pagination pageContext={pageContext} />
             </Layout>
         </>
     )

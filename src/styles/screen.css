@@ -25,10 +25,14 @@ production stylesheet in assets/built/screen.css using gulp dev
 /* ---------------------------------------------------------- */
 
 body {
-    font-family: 'Muli', sans-serif;
+    font-family: 'Kontrapunkt Miki', sans-serif;
     background: var(--color-bg);
     transition: background 0.3s ease-out;
-    transition-delay: 0.25;
+    transition-delay: 0.25s;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Geomanist', sans-serif;
 }
 
 .img {
@@ -101,6 +105,7 @@ body {
     font-size: 4.2rem;
     color: var(--color-base);
 }
+
 @media (max-width: 500px) {
     .page-head-title {
         font-size: 2rem;
@@ -113,6 +118,7 @@ body {
     font-size: 2.2rem;
     line-height: 1.35em;
 }
+
 @media (max-width: 500px) {
     .page-head-description {
         font-size: 1.6rem;
@@ -344,7 +350,7 @@ body {
     .site-head-open {
         background: rgba(255,255,255,1);
         transition: background 0.5s ease-out;
-        transition-delay: 0.25;
+        transition-delay: 0.25s;
         overflow: hidden;
         height: 100vh;
     }
@@ -390,8 +396,29 @@ body {
 /* ---------------------------------------------------------- */
 
 .post-feed {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-gap: 10px;
+    grid-auto-rows: 40px;
+    grid-auto-flow: dense;
+    column-gap: 2rem;
+    row-gap: 2rem;
+}
+
+.post-link h2 {
+    margin: 1rem 0 1rem 0;
+}
+
+@media (max-width: 1050px) {
+    .post-feed {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 850px) {
+    .post-feed {
+        grid-template-columns: 1fr;
+    }
 }
 
 .post-link {
@@ -399,16 +426,25 @@ body {
     min-height: 15vh;
     display: flex;
     position: relative;
-    border-bottom: 2px solid black;
 }
 
 .post-link a {
     color: black;
+    padding: 1rem;
+    border-radius: 2rem;
     text-decoration: none;
+    transition: box-shadow 0.3s ease, background-color 0.3s ease;
+
+}
+
+.post-link a img {
+    border-radius: 1.5rem;
 }
 
 .post-link a:hover {
     color: #5bbf97;
+    background-color: rgba(0,0,0,.05);
+    box-shadow: 0 0 0 1rem rgba(0,0,0,.05);
 }
 
 .post-card {
@@ -417,7 +453,7 @@ body {
     display: flex;
     position: relative;
     height: 35vw;
-    background: linear-gradient(135deg, #1f1f1f 0%, #111 100%) center center;
+    background: radial-gradient(circle, rgba(222,222,222,1) 100%, rgba(0,212,255,0) 100%);
     background-size: cover;
     overflow: hidden;
     counter-increment: posts;
@@ -512,6 +548,16 @@ body {
     .post-card.no-image:before {
         font-size: 50vw;
     }
+}
+
+.pagination {
+    text-align: center;
+    font-size: 2rem;
+    margin: 5rem;
+}
+
+.pagination * {
+    margin: 0 1rem;
 }
 
 /* Post Content

@@ -12,7 +12,15 @@ const PostLink = ({ post, count }) => {
 
         <article className={`post-link`}>
             <Link to={url} className="post-card-link">
+                {post.feature_image &&
+                <img src={
+                    post.feature_image
+                }/>
+                }
                 <h2>{post.title || post.slug}</h2>
+                {post.custom_excerpt &&
+                <p>{post.custom_excerpt}</p>
+                }
             </Link>
         </article>
 

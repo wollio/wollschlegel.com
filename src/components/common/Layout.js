@@ -31,6 +31,7 @@ const DefaultLayout = ({ data, children, bodyClass, isHome }) => {
             <html lang={site.lang} />
             <style type="text/css">{`${site.codeinjection_styles}`}</style>
             <body className={`${bodyClass} ${toggleNav ? `site-head-open` : ``}`} />
+            <script src={'/script.js'} type="text/javascript" />
         </Helmet>
 
         <div className={`site-wrapper ${toggleNav ? `site-head-open` : ``}`}>
